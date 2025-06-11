@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Donas Deliciosas</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .producto { margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 8px; }
+    label { display: block; margin-top: 5px; }
+    button { margin-top: 10px; padding: 8px 12px; border-radius: 5px; background: #ff4081; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🍩 Donas Deliciosas</h1>
+
+  <div class="producto">
+    <h2>Dona Clásica</h2>
+    <p>Precio: $2.00</p>
+    <label><input type="checkbox" value="Chocolate"> Chocolate</label>
+    <label><input type="checkbox" value="Chispas"> Chispas</label>
+    <label><input type="checkbox" value="Crema"> Crema</label>
+    <button onclick="hacerPedido('Dona Clásica', this)">Pedir por WhatsApp</button>
+  </div>
+
+  <div class="producto">
+    <h2>Dona Rellena</h2>
+    <p>Precio: $3.00</p>
+    <label><input type="checkbox" value="Nutella"> Nutella</label>
+    <label><input type="checkbox" value="Frutilla"> Frutilla</label>
+    <label><input type="checkbox" value="Dulce de leche"> Dulce de leche</label>
+    <button onclick="hacerPedido('Dona Rellena', this)">Pedir por WhatsApp</button>
+  </div>
+
+  <script>
+    function hacerPedido(nombreProducto, boton) {
+      let checks = boton.parentElement.querySelectorAll('input[type=checkbox]');
+      let toppings = [];
+      checks.forEach(c => { if (c.checked) toppings.push(c.value); });
+      
+      let mensaje = `¡Hola! Quiero pedir una ${nombreProducto}`;
+      if (toppings.length > 0) {
+        mensaje += ` con: ${toppings.join(', ')}`;
+      }
+      let numero = "1234567890"; // ← Cambia por tu número sin símbolos ni espacios
+      let url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
